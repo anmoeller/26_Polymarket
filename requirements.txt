@@ -1,7 +1,2 @@
-json
-google
-datetime
-logging
-pathlib
+google-genai
 requests
-os
