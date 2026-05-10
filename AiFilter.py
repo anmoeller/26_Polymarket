@@ -4,9 +4,9 @@ AiFilter.py
 Sends Data to Gemini, gives score for relevance.
 """
 
-import environment
 import json
 from google import genai
+import os
 
 
 # Configuration 
@@ -45,12 +45,20 @@ def AiFilterFunction(markets: list[dict]) -> dict[str, tuple[int, str, str]]:
         })
 
     result = {}
+    api_key = os.getenv("GEMINI_API_KEY")
+    if not api_key:
+        try:
+            import environment
+            api_key = environment.GEMINI_API_KEY
+        except ImportError:
+            print("No API-Key found")
+
     for i in range(0, len(question_list), batch_size):
         batch = question_list[i:i+batch_size]
 
         full_prompt = prompt + json.dumps(batch, indent = 2)
         
-        client = genai.Client(api_key= environment.GEMINI_API_KEY)
+        client = genai.Client(api_key= api_key)
         response = client.models.generate_content(
             model='gemini-3.1-flash-lite-preview', contents=full_prompt)
     
