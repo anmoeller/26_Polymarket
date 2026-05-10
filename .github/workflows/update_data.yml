@@ -1,0 +1,38 @@
+name: Get New Data From Polymarket
+
+on:
+  schedule:
+    - cron: '0 4,10 * * *'
+  workflow_dispatch:       
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write   
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Install Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Install Packages
+        run: |
+          pip install -r requirements.txt
+
+      - name: Get Secrets
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }} 
+        run: python main.py
+
+      - name: Save Data
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add data/*.jsonl
+          git commit -m "Get New Data From Polymarket [skip ci]" || echo "No New Data"
+          git push
