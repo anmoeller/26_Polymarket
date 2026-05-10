@@ -8,7 +8,6 @@ import json
 import datetime
 import logging
 from pathlib import Path
-from AiFilter import AiFilterFunction
 import requests
 
 

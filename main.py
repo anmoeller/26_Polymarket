@@ -1,4 +1,3 @@
-import environment
 from PolymarketFetcher import fetch_markets, apply_blacklist, save_markets
 from AiFilter import AiFilterFunction
 
