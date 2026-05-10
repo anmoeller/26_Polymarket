@@ -12,7 +12,6 @@
 environment.py
 .gitattributes
 *.userprefs
-/data
 
 # Mono auto generated files
 mono_crash.*
