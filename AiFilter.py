@@ -13,7 +13,7 @@ import os
 # -----------------------------------------------------------------
 prompt = """
     System Instructions:
-    You are a Senior Energy Markets Analyst. Evaluate Polymarket questions for their impact on the Gas and Electricity Markets. 
+    You are a Senior Energy Markets Analyst. Evaluate Polymarket questions for their impact on the German Gas and Electricity Markets. 
     
     Analysis Framework:
     - Gas: Driven by weather (heating), LNG arrivals, Storage, and geopolitics.

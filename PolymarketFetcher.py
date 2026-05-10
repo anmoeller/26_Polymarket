@@ -18,9 +18,10 @@ OUTPUT_FILE = Path("data/gas_market_history.jsonl")
  
 BLACKLIST = [
     "Grammy", "Album", "Billboard",
-    "NBA", "NFL", "Soccer", "Champions League", "UFC",
+    "NBA", "NFL", "Soccer", "Champions League", "UFC", "UCL"
     "Rotten Tomatoes", "Divorce", "Dating", "Marriage",
-    "Harvey Weinstein", "FIFA World Cup"
+    "Harvey Weinstein", "FIFA World Cup", "La Liga",
+    "Bundesliga", "Premier League", "Bundesliga", "Ligue 1", "Serie A"
 ]
  
 logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
