@@ -7,6 +7,7 @@ Sends Data to Gemini, gives score for relevance.
 import json
 from google import genai
 import os
+import time
 
 
 # Configuration 
@@ -58,10 +59,30 @@ def AiFilterFunction(markets: list[dict]) -> dict[str, tuple[int, str, str]]:
 
         full_prompt = prompt + json.dumps(batch, indent = 2)
         
-        client = genai.Client(api_key= api_key)
-        response = client.models.generate_content(
-            model='gemini-3.1-flash-lite-preview', contents=full_prompt)
-    
+        max_retries = 3
+        attempt = 0
+        success = False
+
+        while attempt < max_retries and not success:
+            try: 
+                client = genai.Client(api_key= api_key)
+                response = client.models.generate_content(
+                    model='gemini-3.1-flash-lite-preview', contents=full_prompt)
+                success = True
+            except Exception as e:
+                attempt += 1
+                if "503" in str(e) or "overloaded" in str(e).lower():
+                    wait_time = attempt * 10
+                    print(f"Server not reachable (503). Attempt {attempt}/{max_retries}. Wait {wait_time}s...")
+                    time.sleep(wait_time)
+                else:
+                    print(f"{e}")
+                    break
+        if not success:
+            print(f"Batch {i} skipped, AI not available")
+            continue
+
+
         try:
             clean_response = response.text.replace('```json', '').replace('```', '').strip()
             data = json.loads(clean_response)

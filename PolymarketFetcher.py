@@ -21,7 +21,7 @@ BLACKLIST = [
     "NBA", "NFL", "Soccer", "Champions League", "UFC", "UCL"
     "Rotten Tomatoes", "Divorce", "Dating", "Marriage",
     "Harvey Weinstein", "FIFA World Cup", "La Liga",
-    "Bundesliga", "Premier League", "Bundesliga", "Ligue 1", "Serie A"
+    "Bundesliga", "Premier League", "Bundesliga", "Ligue 1", "Serie A", "NHL Stanley Cup"
 ]
  
 logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
